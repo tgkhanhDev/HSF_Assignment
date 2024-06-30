@@ -1,5 +1,6 @@
 package pojos;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class CarProducer {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ProducerID")
-	private Set<Car> car;
+	private Set<Car> car = new HashSet<Car>();
 
 	public CarProducer(int producerId, String producerName, String address, String country) {
 		super();

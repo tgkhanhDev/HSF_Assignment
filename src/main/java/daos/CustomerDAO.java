@@ -7,25 +7,25 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import pojos.CarProducer;
+import pojos.Customer;
 
-public class CarProducerDAO {
+public class CustomerDAO {
 	SessionFactory sessionFactory = null;
 	Configuration cf = null;
 
-	public CarProducerDAO(String configuartionFile) {
+	public CustomerDAO(String configuartionFile) {
 		cf = new Configuration();
 		cf = cf.configure(configuartionFile);
 		sessionFactory = cf.buildSessionFactory();
 	}
 
-	public void save(CarProducer carProducer) {
+	public void save(Customer customer) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(carProducer);
+			session.save(customer);
 			t.commit();
-			System.out.println("Save CarProducer successfully !");
+			System.out.println("Save customer successfully !");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			t.rollback();
@@ -34,17 +34,17 @@ public class CarProducerDAO {
 		}
 	}
 
-	public void update(CarProducer carProducer) {
+	public void update(Customer customer) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
 			session.clear();
-			session.update(carProducer);
+			session.update(customer);
 			t.commit();
-			System.out.println("Update CarProducer successfully !");
+			System.out.println("Update customer successfully !");
 		} catch (Exception e) {
-			t.rollback();
 			System.out.println("Error: " + e.getMessage());
+			t.rollback();
 		} finally {
 			session.close();
 		}
@@ -54,45 +54,46 @@ public class CarProducerDAO {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			CarProducer carProducer = session.get(CarProducer.class, id);
-			session.delete(carProducer);
+			Customer customer = session.get(Customer.class, id);
+			session.delete(customer);
 			t.commit();
-			System.out.println("Delete CarProducer successfully !");
+			System.out.println("Delete customer successfully !");
 		} catch (Exception e) {
-			t.rollback();
 			System.out.println("Error: " + e.getMessage());
+			t.rollback();
 		} finally {
 			session.close();
 		}
 	}
 
-	public List<CarProducer> getAll() {
+	public List<Customer> getAll() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			List<CarProducer> ds = session.createQuery("Select cp From CarProducer cp", CarProducer.class).list();
+			List<Customer> ds = session.createQuery("Select c from Customer c", Customer.class).list();
 			return ds;
 		} catch (Exception e) {
-			t.rollback();
 			System.out.println("Error: " + e.getMessage());
+			t.rollback();
+			return null;
+		} finally {
+			session.close();
+		}
+	}
+	
+	public Customer findByID(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			Customer customer = session.get(Customer.class, id);
+			return customer;
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+			t.rollback();
 			return null;
 		} finally {
 			session.close();
 		}
 	}
 
-	public CarProducer findByID(int id) {
-		Session session = sessionFactory.openSession();
-		Transaction t = session.beginTransaction();
-		try {
-			CarProducer carProducer = session.get(CarProducer.class, id);
-			return carProducer;
-		} catch (Exception e) {
-			t.rollback();
-			System.out.println("Error: " + e.getMessage());
-			return null;
-		} finally {
-			session.close();
-		}
-	}
 }

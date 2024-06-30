@@ -27,7 +27,7 @@ public class Customer {
 	@Column(name = "CustomerName")
 	private String customerName;
 
-	@Column(name = "Mobile")
+	@Column(name = "Mobile" , length = 10)
 	private String mobile;
 
 	@Column(name = "Birthdate")

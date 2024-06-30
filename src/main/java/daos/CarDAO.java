@@ -1,31 +1,33 @@
 package daos;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import pojos.Car;
 import pojos.CarProducer;
 
-public class CarProducerDAO {
+public class CarDAO {
 	SessionFactory sessionFactory = null;
 	Configuration cf = null;
 
-	public CarProducerDAO(String configuartionFile) {
+	public CarDAO(String configuartionFile) {
 		cf = new Configuration();
 		cf = cf.configure(configuartionFile);
 		sessionFactory = cf.buildSessionFactory();
 	}
 
-	public void save(CarProducer carProducer) {
+	public void save(Car car) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(carProducer);
+			session.save(car);
 			t.commit();
-			System.out.println("Save CarProducer successfully !");
+			System.out.println("Save Car successfully !");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			t.rollback();
@@ -34,14 +36,14 @@ public class CarProducerDAO {
 		}
 	}
 
-	public void update(CarProducer carProducer) {
+	public void update(Car car) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
 			session.clear();
-			session.update(carProducer);
+			session.update(car);
 			t.commit();
-			System.out.println("Update CarProducer successfully !");
+			System.out.println("Update Car successfully !");
 		} catch (Exception e) {
 			t.rollback();
 			System.out.println("Error: " + e.getMessage());
@@ -54,10 +56,15 @@ public class CarProducerDAO {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			CarProducer carProducer = session.get(CarProducer.class, id);
-			session.delete(carProducer);
+			Car car = session.get(Car.class, id);
+			if(car != null) {
+				CarProducer carProducer = car.getProducer();
+				Set<Car> ds = carProducer.getCar();
+				ds.remove(car);
+				session.update(carProducer);
+			}
 			t.commit();
-			System.out.println("Delete CarProducer successfully !");
+			System.out.println("Delete Car successfully !");
 		} catch (Exception e) {
 			t.rollback();
 			System.out.println("Error: " + e.getMessage());
@@ -66,11 +73,11 @@ public class CarProducerDAO {
 		}
 	}
 
-	public List<CarProducer> getAll() {
+	public List<Car> getAll() {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			List<CarProducer> ds = session.createQuery("Select cp From CarProducer cp", CarProducer.class).list();
+			List<Car> ds = session.createQuery("Select c From Car c", Car.class).list();
 			return ds;
 		} catch (Exception e) {
 			t.rollback();
@@ -81,12 +88,12 @@ public class CarProducerDAO {
 		}
 	}
 
-	public CarProducer findByID(int id) {
+	public Car findByID(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			CarProducer carProducer = session.get(CarProducer.class, id);
-			return carProducer;
+			Car car = session.get(Car.class, id);
+			return car;
 		} catch (Exception e) {
 			t.rollback();
 			System.out.println("Error: " + e.getMessage());
