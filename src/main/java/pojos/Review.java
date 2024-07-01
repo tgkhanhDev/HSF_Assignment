@@ -1,27 +1,33 @@
 package pojos;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "REVIEWS")
 public class Review {
 
-    @Id
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Customer_ID", nullable = false)
-    private Customer customer;
+	@EmbeddedId
+	private CarRentalKey id;
+	
+	@ManyToOne
+	@MapsId("customerId")
+	@JoinColumn(name = "CustomerID", nullable = false)
+	private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "Car_ID", nullable = false)
-    private Car car;
+	@ManyToOne
+	@MapsId("carId")
+	@JoinColumn(name = "CarID", nullable = false)
+	private Car car;
 
-    @Column(name = "Review_Star", nullable = false)
+    @Column(name = "ReviewStar", nullable = false)
     private Integer reviewStar;
 
     @Column(name = "Comment", length = 500)
