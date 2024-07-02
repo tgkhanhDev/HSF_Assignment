@@ -33,10 +33,18 @@ public class Review {
     @Column(name = "Comment", length = 500)
     private String comment;
 
-	public Review(Customer customer, Car car, Integer reviewStar, String comment) {
+    
+    
+	public CarRentalKey getId() {
+		return id;
+	}
+
+	public void setId(CarRentalKey id) {
+		this.id = id;
+	}
+
+	public Review( Integer reviewStar, String comment) {
 		super();
-		this.customer = customer;
-		this.car = car;
 		this.reviewStar = reviewStar;
 		this.comment = comment;
 	}

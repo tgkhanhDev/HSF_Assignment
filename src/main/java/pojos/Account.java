@@ -19,7 +19,7 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "ACCOUNTS")
 public class Account {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "AccountID")
 	private int accountID;
 
@@ -35,9 +35,9 @@ public class Account {
 
 	
 
-	public Account(int accountID, String accountName, String role) {
+	public Account(String accountName, String role) {
 		super();
-		this.accountID = accountID;
+		
 		this.accountName = accountName;
 		this.role = role;
 	}

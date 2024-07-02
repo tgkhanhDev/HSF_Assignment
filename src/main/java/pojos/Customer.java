@@ -1,13 +1,17 @@
 package pojos;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -53,6 +57,32 @@ public class Customer {
 	@OneToOne(cascade = javax.persistence.CascadeType.ALL)
 	@JoinColumn(name = "AccountID")
 	private Account account;
+	
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "CustomerID")
+	private Set<Review> reviewList = new HashSet<Review>();
+	
+	@OneToMany(fetch =  FetchType.EAGER)
+	@JoinColumn(name = "CustomerID")
+	private Set<CarRental> carRentalList = new HashSet<CarRental>();
+	
+
+	public Set<Review> getReviewList() {
+		return reviewList;
+	}
+
+	public void setReviewList(Set<Review> reviewList) {
+		this.reviewList = reviewList;
+	}
+
+	public Set<CarRental> getCarRentalList() {
+		return carRentalList;
+	}
+
+	public void setCarRentalList(Set<CarRental> carRentalList) {
+		this.carRentalList = carRentalList;
+	}
 
 	public Customer(String customerName, String mobile, Date birthday, String identityCard, String licenceNumber,
 			Date licenceDate, String email, String password, Account account) {

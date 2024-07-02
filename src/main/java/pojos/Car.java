@@ -1,6 +1,8 @@
 package pojos;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,9 +54,34 @@ public class Car {
 
 	@Column(name = "Status", nullable = false)
 	private String status;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "CarID")
+	private Set<CarRental> carRentalList = new HashSet<CarRental>();
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "CarID")
+	private Set<Review> carReviewList = new HashSet<Review>();
+	
+	
+	public Set<CarRental> getCarRentalList() {
+		return carRentalList;
+	}
+
+	public void setCarRentalList(Set<CarRental> carRentalList) {
+		this.carRentalList = carRentalList;
+	}
+
+	public Set<Review> getCarReviewList() {
+		return carReviewList;
+	}
+
+	public void setCarReviewList(Set<Review> carReviewList) {
+		this.carReviewList = carReviewList;
+	}
 
 	public Car(String carName, Integer carModelYear, String color, Integer capacity, String description,
-			Date importDate, CarProducer producer, double rentPrice, String status) {
+			Date importDate, double rentPrice, String status) {
 		super();
 		this.carName = carName;
 		this.carModelYear = carModelYear;
@@ -61,7 +89,6 @@ public class Car {
 		this.capacity = capacity;
 		this.description = description;
 		this.importDate = importDate;
-		this.producer = producer;
 		this.rentPrice = rentPrice;
 		this.status = status;
 	}

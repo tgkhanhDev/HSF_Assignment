@@ -36,9 +36,8 @@ public class CarProducer {
 	@JoinColumn(name = "ProducerID")
 	private Set<Car> car = new HashSet<Car>();
 
-	public CarProducer(int producerId, String producerName, String address, String country) {
+	public CarProducer(String producerName, String address, String country) {
 		super();
-		this.producerId = producerId;
 		this.producerName = producerName;
 		this.address = address;
 		this.country = country;

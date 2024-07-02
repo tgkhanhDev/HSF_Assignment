@@ -45,11 +45,19 @@ public class CarRental {
 
 	@Column(name = "Status", nullable = false)
 	private String status;
+	
+	
 
-	public CarRental(Customer customer, Car car, Date pickupDate, Date returnDate, double rentPrice, String status) {
+	public CarRentalKey getId() {
+		return id;
+	}
+
+	public void setId(CarRentalKey id) {
+		this.id = id;
+	}
+
+	public CarRental(Date pickupDate, Date returnDate, double rentPrice, String status) {
 		super();
-		this.customer = customer;
-		this.car = car;
 		this.pickupDate = pickupDate;
 		this.returnDate = returnDate;
 		this.rentPrice = rentPrice;
