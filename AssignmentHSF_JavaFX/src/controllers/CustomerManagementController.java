@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
@@ -19,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import pojos.Account;
 import pojos.Customer;
 import services.AccountService;
@@ -99,6 +103,7 @@ public class CustomerManagementController implements Initializable{
 		mobile_tbl.setCellValueFactory(new PropertyValueFactory("mobile"));
 		password_tbl.setCellValueFactory(new PropertyValueFactory("password"));
 		accountID_tbl.setCellValueFactory(new PropertyValueFactory("accountID"));
+		data_tbl.setItems(ds);
 		return ds;
 	}
 	
@@ -134,10 +139,6 @@ public class CustomerManagementController implements Initializable{
 			showCustomer();
 		} catch (Exception e) {
 			System.out.println("Error: "+e.getMessage());
-			System.out.println("Error: "+e.getMessage());
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Error: "+e.getMessage());
-			alert.show();
 		}
 	}
 	@FXML
@@ -179,10 +180,6 @@ public class CustomerManagementController implements Initializable{
 			showCustomer();
 		} catch (Exception e) {
 			System.out.println("Error: "+e.getMessage());
-			System.out.println("Error: "+e.getMessage());
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Error: "+e.getMessage());
-			alert.show();
 		}
 	}
 	@FXML
@@ -204,6 +201,21 @@ public class CustomerManagementController implements Initializable{
 	}
 	@FXML
 	public void RedirectCarManagement() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../guis/CarManagement.fxml"));
+			Parent root = loader.load();
+			root.getStylesheets().add(getClass().getResource("../guis/application.css").toExternalForm());
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
+			
+			Stage currentStage = (Stage) customerName_txt.getScene().getWindow();
+            currentStage.close();
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Error:" + e.getMessage());
+			alert.show();
+		}
 
 	}
 	@Override

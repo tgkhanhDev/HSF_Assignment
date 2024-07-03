@@ -39,6 +39,9 @@ public class LoginController {
 					Stage stage = new Stage();
 					stage.setScene(new Scene(root));
 					stage.show();
+					
+					Stage currentStage = (Stage) txt_UserName.getScene().getWindow();
+	                currentStage.close();
 				}
 
 			} else {
@@ -54,6 +57,7 @@ public class LoginController {
 
 	@FXML
 	public void Cancel() {
-
+		Stage cancelStage = (Stage) txt_UserName.getScene().getWindow();
+		cancelStage.close();
 	}
 }
