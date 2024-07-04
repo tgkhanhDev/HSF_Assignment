@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml">
+    <left>
+        <VBox spacing="20" style="-fx-background-color: #1a1b4b;" alignment="CENTER">
+            <VBox alignment="CENTER" spacing="10">
+                <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100">
+                    <clip>
+                        <Circle radius="50" />
+                    </clip>
+                </ImageView>
+                <Label text="Mahmoud Hamwi" style="-fx-text-fill: white; -fx-font-size: 16;" />
+                <Button text="Edit Profile" style="-fx-background-color: #3a3b5a; -fx-text-fill: white;" />
+            </VBox>
+            <VBox spacing="10" style="-fx-padding: 20;" alignment="CENTER_LEFT">
+                <Button text="Profile" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+                <Button text="Notifications" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+                <Button text="Password" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+                <Button text="Settings" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+                <Button text="Privacy Policy" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            </VBox>
+        </VBox>
+    </left>
+    <center>
+        <AnchorPane style="-fx-background-color: #2a2b6a;">
+            <VBox spacing="20" style="-fx-padding: 40;">
+                <Label text="Profile Settings" style="-fx-text-fill: white; -fx-font-size: 24;" />
+                <VBox spacing="10">
+                    <Label text="Profile details" style="-fx-text-fill: white; -fx-font-size: 16;" />
+                    <HBox spacing="10">
+                        <Label text="Name" style="-fx-text-fill: white;" />
+                        <TextField fx:id="nameField" />
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="Username" style="-fx-text-fill: white;" />
+                        <TextField fx:id="usernameField" />
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="Date of Birth" style="-fx-text-fill: white;" />
+                        <TextField fx:id="dobField" />
+                    </HBox>
+                </VBox>
+                <VBox spacing="10">
+                    <Label text="Contact info" style="-fx-text-fill: white; -fx-font-size: 16;" />
+                    <HBox spacing="10">
+                        <Label text="Phone" style="-fx-text-fill: white;" />
+                        <TextField fx:id="phoneField" />
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="Email" style="-fx-text-fill: white;" />
+                        <TextField fx:id="emailField" />
+                    </HBox>
+                </VBox>
+            </VBox>
+        </AnchorPane>
+    </center>
+</BorderPane>
+
+

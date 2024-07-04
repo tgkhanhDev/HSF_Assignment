@@ -204,7 +204,7 @@ public class CustomerManagementController implements Initializable{
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../guis/CarManagement.fxml"));
 			Parent root = loader.load();
-			root.getStylesheets().add(getClass().getResource("../guis/application.css").toExternalForm());
+			root.getStylesheets().add(getClass().getResource("../guis/CarManagement.css").toExternalForm());
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.show();

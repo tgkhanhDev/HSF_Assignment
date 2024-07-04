@@ -35,7 +35,17 @@ public class LoginController {
 				if (loginUser.getAccount().getRole().equals("Admin")) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("../guis/CustomerManagement.fxml"));
 					Parent root = loader.load();
-					root.getStylesheets().add(getClass().getResource("../guis/application.css").toExternalForm());
+					root.getStylesheets().add(getClass().getResource("../guis/CustomerManagement.css").toExternalForm());
+					Stage stage = new Stage();
+					stage.setScene(new Scene(root));
+					stage.show();
+					
+					Stage currentStage = (Stage) txt_UserName.getScene().getWindow();
+	                currentStage.close();
+				}else if(loginUser.getAccount().getRole().equals("Customer")) {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("../guis/Customer_Profile.fxml"));
+					Parent root = loader.load();
+					root.getStylesheets().add(getClass().getResource("../guis/CustomerView.css").toExternalForm());
 					Stage stage = new Stage();
 					stage.setScene(new Scene(root));
 					stage.show();

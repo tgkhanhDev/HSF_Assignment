@@ -216,7 +216,6 @@ public class CarManagementController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		showCars();
-
 		filteredData = new FilteredList<Car>(ds, b -> true);
 		sortedData = new SortedList<>(filteredData);
 		sortedData.comparatorProperty().bind(data_tbl.comparatorProperty());
